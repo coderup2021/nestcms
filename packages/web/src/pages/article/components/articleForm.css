@@ -1,0 +1,19 @@
+.upload-preview-box {
+  text-align: center;
+  background: #fff;
+  margin-bottom: 30px;
+  position: relative;
+}
+.upload-preview-box .del-icon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 24px;
+}
+.upload-preview-box img {
+  max-width: 50%;
+}
+.upload-box {
+  background-color: #fff;
+  padding: 10px;
+}
