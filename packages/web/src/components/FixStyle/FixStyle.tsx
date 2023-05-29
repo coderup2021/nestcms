@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react'
-import { FullScreenSkeleton } from './FullScreenSkeleton'
+import FullScreenSkeleton from 'src/components/FullScreenSkeleton'
 
 const FixStyle: FC<PropsWithChildren> = ({ children }) => {
   const [inited, setInited] = useState(false)

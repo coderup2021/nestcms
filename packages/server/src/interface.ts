@@ -18,17 +18,22 @@ export interface QueryOption {
   order?: 'asc' | 'dsc';
 }
 
+export interface PaginateData<T> {
+  data: T;
+  total?: number;
+  pageSize?: number;
+  current?: number;
+}
+
 export interface IRes<T> {
   status: HttpStatus;
-  payload: {
-    data: T;
-    total?: number;
-    pageSize?: number;
-    current?: number;
-  };
+  payload: PaginateData<T> | T;
   message: string;
 }
 
+export interface AuthResponse {
+  token: string
+}
 export interface UploadRes {
   status: HttpStatus;
   filename: string;
@@ -59,6 +64,10 @@ export type IFile = Partial<File>;
 export interface ILogin {
   username: string;
   password: string;
+}
+
+export interface Me {
+  username: string;
 }
 
 export interface UrlQueryParam {

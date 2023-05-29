@@ -19,6 +19,7 @@
     "@uiw/react-md-editor": "^3.20.10",
     "@wangeditor/editor": "^5.1.23",
     "@wangeditor/editor-for-react": "^1.0.6",
+    "ahooks": "^3.7.7",
     "antd": "^5.4.6",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",

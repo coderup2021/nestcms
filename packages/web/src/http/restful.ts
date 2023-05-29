@@ -22,33 +22,36 @@ export const post = async <T>(
   endPoint: string,
   options?: AxiosRequestConfig,
 ): Promise<T> => {
-  const data = options?.data || {}
-  return axios(endPoint, {
+  const body = options?.data || {}
+  const {data} = await axios(endPoint, {
     method: 'POST',
-    data,
+    data:body,
   })
+  return data
 }
 
 export const put = async <T>(
   endPoint: string,
   options?: AxiosRequestConfig,
 ): Promise<T> => {
-  const data = options?.data || {}
-  return axios(endPoint, {
+  const body = options?.data || {}
+  const {data} = await axios(endPoint, {
     method: 'PUT',
-    data,
+    data:body,
   })
+  return data
 }
 
 export const del = async <T>(
   endPoint: string,
   options?: AxiosRequestConfig,
 ): Promise<T> => {
-  const data = options?.data || {}
-  return axios(endPoint, {
+  const body = options?.data || {}
+  const {data} = await axios(endPoint, {
     method: 'DELETE',
-    data,
+    data:body,
   })
+  return data
 }
 
 export const postPictures = async (

@@ -37,6 +37,7 @@ const TableList: React.FC = () => {
 
   useEffect(() => {
     fetchData()
+    //eslint-disable-next-line
   }, [])
 
   /**

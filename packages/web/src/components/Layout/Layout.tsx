@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Breadcrumb, Layout, Menu, theme } from 'antd'
+import Logout from '../Logout'
 
 const { Header, Content, Sider } = Layout
 
@@ -57,6 +58,7 @@ const App: React.FC<PropsWithChildren> = ({ children }) => {
       <Header className="header">
         <div className="logo" />
         {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} /> */}
+        <Logout />
       </Header>
       <Layout>
         <Sider width={200} style={{ background: colorBgContainer }}>

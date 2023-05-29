@@ -8,14 +8,18 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 import 'antd/dist/reset.css'
 import FixStyle from '@/components/FixStyle'
+import Auth from '@/components/Auth/Auth'
 
 export default function App({ Component, pageProps }: AppProps) {
+  console.log('_app>>>>>>>>>>>>>>>>>>>..')
   return (
     <IntlProvider messages={cn} locale="fr" defaultLocale="en">
       <FixStyle>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Auth>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Auth>
       </FixStyle>
     </IntlProvider>
   )

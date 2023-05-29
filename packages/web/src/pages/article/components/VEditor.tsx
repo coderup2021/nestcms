@@ -28,6 +28,7 @@ let VEditor: React.FC<VditorReactComponentProps> = ({
 
   useEffect(() => {
     const vditor = new Vditor('react-vidtor-id', {
+      height: 600,
       after: () => {
         vditor.setValue(value)
         onChange && onChange(value)
@@ -36,7 +37,7 @@ let VEditor: React.FC<VditorReactComponentProps> = ({
         onChange && onChange(string)
       },
     })
-  }, [])
+  }, [onChange, value])
 
   return <div id={'react-vidtor-id'} className="vditor" />
   return isClient ? <div id={'react-vidtor-id'} className="vditor" /> : null

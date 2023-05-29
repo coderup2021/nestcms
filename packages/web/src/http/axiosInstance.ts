@@ -1,3 +1,4 @@
+import { getAuthToken } from '@/utils/store'
 import Axios, { AxiosRequestConfig } from 'axios'
 
 const axios = Axios.create({
@@ -9,6 +10,7 @@ const axios = Axios.create({
 axios.interceptors.request.use(
   (config) => {
     // Do something before request is sent
+    config.headers.Authorization = getAuthToken() 
     return config
   },
   (error) => {

@@ -46,7 +46,7 @@ const CateForm: React.FC<UpdateFormProps> = (props) => {
           defaultMessage: 'Modify Category',
         })
       : null
-  }, [oper])
+  }, [oper, intl])
   return (
     <ModalForm<ICate>
       width={500}

@@ -1,4 +1,9 @@
-import { IArticle, IArticleList, OPER, UrlQueryParam } from '@cms/server/src/interface'
+import {
+  IArticle,
+  IArticleList,
+  OPER,
+  UrlQueryParam,
+} from 'src/interface'
 import {
   putArticle,
   postArticle,
@@ -24,9 +29,9 @@ import {
 } from '@ant-design/pro-components'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { Button, message, Tooltip, TreeSelect } from 'antd'
-import React, {useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ArticleForm from './components/ArticleForm'
-import { push, useSearch } from '@/hooks'
+import { useSearch } from '@/hooks'
 import { flatToTree } from '@/utils'
 import { useArticleStore } from './articleStore'
 import { useRouter } from 'next/router'
@@ -38,19 +43,20 @@ export interface QueryOption {
 }
 
 const TableList: React.FC = () => {
+  const { total, data, dataMap, fetchData, setCurrent, setPageSize } =
+    useArticleStore((s) => ({
+      total: s.total,
+      data: s.data,
+      dataMap: s.dataMap,
+      fetchData: s.fetchData,
+      setCurrent: s.setCurrent,
+      setPageSize: s.setPageSize,
+    }))
 
-  const {total, data, dataMap, fetchData, setCurrent, setPageSize} = useArticleStore(s=>({
-    total: s.total,
-    data: s.data,
-    dataMap: s.dataMap,
-    fetchData: s.fetchData,
-    setCurrent: s.setCurrent,
-    setPageSize: s.setPageSize,
-  }))
-
-  useEffect(()=>{
+  useEffect(() => {
     fetchData()
-  },[])
+    //eslint-disable-next-line
+  }, [])
 
   const router = useRouter()
   const push = (oper: OPER, id?: Id) => {
@@ -62,7 +68,6 @@ const TableList: React.FC = () => {
 
     router.push({ query: obj as ParsedUrlQueryInput })
   }
-
 
   /**
    * @en-US The pop-up window of the distribution update window
@@ -365,17 +370,20 @@ const TableList: React.FC = () => {
               },
             }}
             pagination={{
-              total:total,
+              total: total,
               showSizeChanger: true,
               pageSizeOptions: [10, 20, 50, 100, 200, 500],
               onChange(page, pageSize) {
-                setCurrent(page)    
+                setCurrent(page)
                 setPageSize(pageSize)
                 fetchData()
               },
             }}
-
-            options={{reload:()=>{fetchData()}}}
+            options={{
+              reload: () => {
+                fetchData()
+              },
+            }}
           />
           {selectedRowsState?.length > 0 && (
             <FooterToolbar

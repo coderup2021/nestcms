@@ -16,17 +16,6 @@ export const useSearch = (): UrlQueryParam => {
   return { id, oper } as UrlQueryParam
 }
 
-export const push = (oper: OPER, id?: Id) => {
-  const router = useRouter()
-
-  let obj: UrlQueryParam = {}
-  if (oper !== OPER.NONE) {
-    obj.oper = oper
-    if (id) obj.id = id
-  }
-
-  router.push({ query: obj as ParsedUrlQueryInput })
-}
 
 // export const useGetResource = () => {
 //   const { setResourceList, setResourceTree, setResourceIdNameMap } =

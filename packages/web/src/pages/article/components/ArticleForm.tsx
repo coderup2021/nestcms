@@ -9,15 +9,16 @@ import {
 } from '@ant-design/pro-components'
 import { useIntl, FormattedMessage } from 'react-intl'
 import { Form, Input, message, TreeSelect, Upload, UploadProps } from 'antd'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { IArticle, IFile, IRes, OPER } from '@cms/server/src/interface'
-import { getArticle, getCateList } from '@/http/api'
 // import { editorList } from '@/components/Editor'
-import { flatToTree } from '@/utils'
 import { DeleteOutlined, InboxOutlined } from '@ant-design/icons'
 import { postPictures } from '@/http/restful'
 import { useSearch } from '@/hooks'
 import dynamic from 'next/dynamic'
+import { useCateStore } from '@/pages/cate/cateStore'
+import { useArticleStore } from '../articleStore'
+import Image from 'next/image'
 
 export type UpdateFormProps = {
   onCancel: (flag?: boolean, formVals?: IArticle) => void
@@ -32,21 +33,56 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
   const VEditor = dynamic(() => import('./VEditor'), { ssr: false })
   const [content, setContent] = useState('')
   const editorRef = useRef(null)
-  const [newContent, setNewContent] = useState('')
   const contentRef = useRef({ value: '' })
-  const requestArticle = async () => {
+  const { loading, article, fetchArticle, resetArticle } = useArticleStore(
+    (s) => ({
+      loading: s.loading,
+      article: s.article,
+      fetchArticle: s.fetchArticle,
+      resetArticle: s.resetArticle,
+    }),
+  )
+  const cateTree = useCateStore((s) => s.treeData)
+  const fetchCate = useCateStore((s) => s.fetchData)
+
+  useEffect(() => {
+    fetchCate()
+    //eslint-disable-next-line
+  }, [])
+
+  useEffect(() => {
+    console.log('id', id)
     if (id) {
-      return getArticle(id as number).then((res: IRes<IArticle>) => {
-        setContent(res.data.content || '')
-        return {
-          cateId: res.data.cate?.id,
-          ...res.data,
-        }
-      })
+      fetchArticle(id)
     } else {
-      return {}
+      resetArticle()
     }
-  }
+    //eslint-disable-next-line
+  }, [id])
+
+  useEffect(() => {
+    if (article) {
+      formRef.current?.setFieldsValue(article)
+      setContent(article.content)
+    } else {
+      formRef.current?.resetFields()
+      setContent('')
+    }
+  }, [article])
+
+  //   const requestArticle = async () => {
+  //     if (id) {
+  //       return getArticle(id as number).then((res: IRes<IArticle>) => {
+  //         setContent(res.data.content || '')
+  //         return {
+  //           cateId: res.data.cate?.id,
+  //           ...res.data,
+  //         }
+  //       })
+  //     } else {
+  //       return {}
+  //     }
+  //   }
 
   const intl = useIntl()
   const formRef = useRef<ProFormInstance | null>(null)
@@ -85,11 +121,12 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
     const values = formRef.current?.getFieldsValue()
     await props.onSubmit({ ...values, content: contentRef.current.value })
     props.onCancel()
-  }, [newContent])
+  }, [props])
 
   return (
     <ProForm<IArticle>
-      request={requestArticle}
+      //   request={requestArticle}
+      loading={loading}
       style={{ width: '100%' }}
       formRef={formRef}
       size="large"
@@ -148,11 +185,11 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
 
       <ProFormTreeSelect
         name="cateId"
-        request={async () => getCateList().then(({ data }) => flatToTree(data))}
         fieldProps={{
           placeholder: intl.formatMessage({
             id: 'pages.article.catePlaceholder',
           }),
+          treeData: cateTree,
           treeDefaultExpandAll: true,
           showCheckedStrategy: TreeSelect.SHOW_PARENT,
           fieldNames: { value: 'id', label: 'name' },
@@ -169,7 +206,7 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
                   formRef.current?.setFieldValue('picture', void 0)
                 }}
               />
-              <img src={picture} />
+              <Image src={picture} alt={'thumb'} width={200} />
             </div>
           ) : (
             <Dragger

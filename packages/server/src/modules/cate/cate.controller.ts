@@ -21,7 +21,7 @@ export class CateController {
   @Get('/:id')
   async detail(@Param('id') id: number) {
     const cate = await this.service.findOne({ id });
-    return { status: 0, data: cate };
+    return { status: 0, payload: cate };
   }
 
   async buildQuery(option: FindManyOptions, fields: ICate) {
@@ -63,7 +63,7 @@ export class CateController {
       parentId,
       path,
     });
-    return { status: 0, data: { id } };
+    return { status: 0, payload: { id } };
   }
 
   @Put('/:id')
@@ -82,7 +82,7 @@ export class CateController {
         parentId,
         path,
       });
-      return { status: 0, data: { id } };
+      return { status: 0, payload: { id } };
     } catch (error) {
       throw new HttpException(error.toString(), 400);
     }

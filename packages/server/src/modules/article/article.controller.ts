@@ -20,7 +20,7 @@ export class ArticleController {
   @Get('/:id')
   async detail(@Param('id') id: number) {
     const article = await this.service.findOne({ id });
-    return { status: 0, data: article };
+    return { status: 0, payload: article };
   }
 
   async buildQuery(option: FindManyOptions, fields: IArticle) {
@@ -62,7 +62,7 @@ export class ArticleController {
       cateId,
       picture,
     });
-    return { status: 0, data: { id } };
+    return { status: 0, payload: { id } };
   }
 
   @Put('/:id')
@@ -77,7 +77,7 @@ export class ArticleController {
       cateId,
       picture,
     });
-    return { status: 0, data: { id } };
+    return { status: 0, payload: { id } };
   }
 
   @Delete('/:ids')
