@@ -1,4 +1,4 @@
-import { useGlobalStore } from '@/globalStore';
+import { useGlobalStore } from '@/store/globalStore';
 import { login } from '@/http/api/apiAuth';
 import { setAuthToken } from '@/utils/store';
 import {
@@ -31,7 +31,7 @@ const iconStyles: CSSProperties = {
 const Login = () => {
   const [loginType, setLoginType] = useState<LoginType>('account');
   const setAuthed = useGlobalStore(s => s.setAuthed)
-  const onFinish = useCallback(async (values) => {
+  const onFinish = useCallback(async (values:any) => {
     const { username, password, autoLogin } = values
     const { payload } = await login({ username, password })
     const pl = payload as { token: string }

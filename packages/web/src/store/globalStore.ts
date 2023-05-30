@@ -1,6 +1,6 @@
-import { HttpStatus } from '@cms/server/src/interface';
+import { HttpStatus } from 'src/interface';
 import { create } from 'zustand'
-import { me } from './http/api/apiAuth';
+import { me } from 'src/http/api/apiAuth';
 
 interface GlobalState {
   authed: null | boolean

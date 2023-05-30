@@ -1,3 +1,5 @@
+import { IdNameMapProps } from "@/interface"
+
 interface FlatTreeProps {
   id: string
   parentId: string
@@ -25,7 +27,7 @@ export const flatToTree = <T>(
       ...dictionary[nodeId], // children will be replaced if this node already has children property which was set below
     }
     dictionary[nodeParentId] =
-      dictionary[nodeParentId] || ({ [children]: [] } as T) // if it's not exist in dictionary, init an object with children property
+      dictionary[nodeParentId] || ({ [children]: [] } as unknown as T) // if it's not exist in dictionary, init an object with children property
     ;(dictionary[nodeParentId] as any)[children].push(dictionary[nodeId] as T) // add reference to current node object in parent node object
   })
   // find root nodes
@@ -81,7 +83,7 @@ export function getIdPath<T>(id: number, cateTree: T[]): string {
   function _handle(id: number, cateTree: T[]) {
     for (let i = 0; i < cateTree.length; i++) {
       if (flag) return
-      const cate = cateTree[i] as T
+      const cate = cateTree[i] as any
       if (cate.id === id) {
         paths.unshift(cate.id)
         flag = true
@@ -105,12 +107,12 @@ export function getIdPath<T>(id: number, cateTree: T[]): string {
 }
 
 export function addRootNode<T>(cateTree: T[]): T[] {
-  const root: T = {
+  const root: any = {
     id: 0,
     name: '根目录',
     parentId: 0,
     path: '/',
     children: cateTree,
-  } as T
+  } as unknown as T
   return [root]
 }

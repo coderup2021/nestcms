@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { ICate, ICateList, QueryOption, IRes } from '@cms/server/src/interface'
+import { ICate, ICateList, QueryOption, IRes, PaginateData } from 'src/interface'
 import { get, post, del, put } from 'src/http/restful'
 
 /** 获取分类详情 GET /api/cate/:id */
@@ -7,7 +7,7 @@ export const getCate = (id: number) => get<IRes<ICate>>(`/api/cate/${id}`)
 
 /** 获取分类列表 GET /api/cate */
 export const getCateList = (params?: QueryOption) =>
-  get<IRes<ICateList>>('/api/cate', { params })
+  get<IRes<PaginateData<ICateList>>>('/api/cate', { params })
 
 export const postCate = (data: ICate) =>
   post<IRes<ICate>>('/api/cate', { data })

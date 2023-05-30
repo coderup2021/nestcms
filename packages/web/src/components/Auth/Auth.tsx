@@ -1,4 +1,4 @@
-import { useGlobalStore } from '@/globalStore'
+import { useGlobalStore } from '@/store/globalStore'
 import Login from '@/pages/login'
 import React, { FC, PropsWithChildren, useEffect, useState } from 'react'
 import FullScreenSkeleton from 'src/components/FullScreenSkeleton'

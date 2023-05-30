@@ -7,7 +7,7 @@ import {
 import { useIntl } from 'react-intl'
 import { TreeSelect } from 'antd'
 import React, { useCallback, useEffect, useRef } from 'react'
-import { ICate, OPER } from '@cms/server/src/interface'
+import { ICate, OPER } from 'src/interface'
 import { addRootNode } from '@/utils'
 
 export type UpdateFormProps = {

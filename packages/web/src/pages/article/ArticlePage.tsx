@@ -1,6 +1,7 @@
 import {
   IArticle,
   IArticleList,
+  Id,
   OPER,
   UrlQueryParam,
 } from 'src/interface'
@@ -32,9 +33,9 @@ import { Button, message, Tooltip, TreeSelect } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
 import ArticleForm from './components/ArticleForm'
 import { useSearch } from '@/hooks'
-import { flatToTree } from '@/utils'
-import { useArticleStore } from './articleStore'
+import { useArticleStore } from 'src/store/articleStore'
 import { useRouter } from 'next/router'
+import { ParsedUrlQueryInput } from 'querystring'
 
 export interface QueryOption {
   current?: number
@@ -169,9 +170,6 @@ const TableList: React.FC = () => {
         }
         return (
           <ProFormTreeSelect
-            request={async () =>
-              getCateList().then(({ data }) => flatToTree(data))
-            }
             allowClear
             fieldProps={{
               treeDefaultExpandAll: true,
@@ -336,7 +334,7 @@ const TableList: React.FC = () => {
             },
           }}
         >
-          <ProTable<IArticleList, QueryOption>
+          <ProTable<IArticle, QueryOption>
             headerTitle={intl.formatMessage({
               id: 'pages.searchTable.title',
               defaultMessage: 'Enquiry form',
@@ -362,7 +360,7 @@ const TableList: React.FC = () => {
                 />
               </Button>,
             ]}
-            dataSource={data}
+            dataSource={data }
             columns={columns}
             rowSelection={{
               onChange: (_, selectedRows) => {

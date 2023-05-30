@@ -11,7 +11,6 @@ import FixStyle from '@/components/FixStyle'
 import Auth from '@/components/Auth/Auth'
 
 export default function App({ Component, pageProps }: AppProps) {
-  console.log('_app>>>>>>>>>>>>>>>>>>>..')
   return (
     <IntlProvider messages={cn} locale="fr" defaultLocale="en">
       <FixStyle>

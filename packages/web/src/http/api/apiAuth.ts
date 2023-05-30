@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { ICate, ICateList, QueryOption, IRes, Me } from '@cms/server/src/interface'
+import { ICate, ICateList, QueryOption, IRes, Me } from 'src/interface'
 import { get, post, del, put } from 'src/http/restful'
 
 /** 获取分类详情 GET /api/cate/:id */

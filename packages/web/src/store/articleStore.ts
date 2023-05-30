@@ -6,7 +6,7 @@ import {
   ICateList,
   PaginateData,
   QueryOption,
-} from '@cms/server/src/interface'
+} from 'src/interface'
 import { create } from 'zustand'
 
 interface IState {
@@ -67,7 +67,7 @@ export const useArticleStore = create<IState & IAction>((set, get) => {
         set({
           data: data,
           dataMap: data.reduce((i: any, j: IArticle) => {
-            i[j.id] = j
+            i[j.id as number] = j
             return i
           }, {}),
         })

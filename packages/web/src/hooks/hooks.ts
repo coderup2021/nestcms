@@ -5,7 +5,7 @@ import {
   IRes,
   IResource,
   IRole,
-} from '@cms/server/src/interface'
+} from 'src/interface'
 import { useRouter } from 'next/router'
 import { ParsedUrlQueryInput } from 'node:querystring'
 

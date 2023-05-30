@@ -1,7 +1,7 @@
 import axios from './axiosInstance'
 import { AxiosRequestConfig } from 'axios'
 import { stringify } from 'qs'
-import { IFile, IRes } from '@cms/server/src/interface'
+import { IFile, IRes } from 'src/interface'
 
 export const get = async <T>(
   endPoint: string,
@@ -65,13 +65,13 @@ export const postPictures = async (
       const formData = new FormData()
       formData.append('file', item)
       formData.append('name', item.name)
-      const p: Promise<IRes<IFile[]>> = axios<IFile>('/api/upload', {
+      const p: Promise<IRes<IFile[]>> = (axios<IFile>('/api/upload', {
         method: 'POST',
         data: formData,
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-      })
+      })) as unknown as  Promise<IRes<IFile[]>> 
       return p
     })
 

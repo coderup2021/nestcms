@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { IResource, QueryOption, IRes } from '@cms/server/src/interface'
+import { IResource, QueryOption, IRes } from 'src/interface'
 import { get, post, del, put } from 'src/http/restful'
 
 /** 获取资源详情 GET /api/resource/:id */

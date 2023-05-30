@@ -1,3 +1,3 @@
-import FixStyle from './FixStyle'
+import Auth from './Auth'
 
-export default FixStyle
+export default Auth

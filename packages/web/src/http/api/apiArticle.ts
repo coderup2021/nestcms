@@ -4,7 +4,7 @@ import {
   IArticleList,
   QueryOption,
   IRes,
-} from '@cms/server/src/interface'
+} from 'src/interface'
 import { get, post, del, put } from 'src/http/restful'
 
 /** 获取文章详情 GET /api/article/:id */

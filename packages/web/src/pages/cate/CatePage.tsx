@@ -4,7 +4,8 @@ import {
   QueryOption,
   OPER,
   UrlQueryParam,
-} from '@cms/server/src/interface'
+  Id,
+} from 'src/interface'
 import { putCate, postCate, delCate, getCateList } from '@/http/api'
 import { DeleteFilled, EditOutlined, PlusOutlined } from '@ant-design/icons'
 import { ActionType, ProColumns } from '@ant-design/pro-components'
@@ -19,7 +20,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import CateForm from './components/CateForm'
 import { useSearch } from '@/hooks'
 import { getIdPath } from '@/utils'
-import { useCateStore } from './cateStore'
+import { useCateStore } from 'src/store/cateStore'
 import { useRouter } from 'next/router'
 import { ParsedUrlQueryInput } from 'querystring'
 
@@ -65,7 +66,7 @@ const TableList: React.FC = () => {
       intl.formatMessage({ id: 'pages.operate.doing' }),
     )
     try {
-      fields.path = getIdPath(fields.parentId || 0, treeData)
+      fields.path = getIdPath<ICate>(fields.parentId || 0, treeData)
       await postCate({ ...fields })
       message.success(intl.formatMessage({ id: 'pages.operate.success' }))
       fetchData()
@@ -85,7 +86,7 @@ const TableList: React.FC = () => {
       intl.formatMessage({ id: 'pages.operate.doing' }),
     )
     try {
-      fields.path = getIdPath(fields.parentId || 0, treeData)
+      fields.path = getIdPath<ICate>(fields.parentId || 0, treeData)
       await putCate(fields)
       message.success(intl.formatMessage({ id: 'pages.operate.success' }))
       fetchData()
@@ -254,7 +255,7 @@ const TableList: React.FC = () => {
           },
         }}
       >
-        <ProTable<ICateList, QueryOption>
+        <ProTable<ICate, QueryOption>
           headerTitle={intl.formatMessage({
             id: 'pages.searchTable.title',
             defaultMessage: 'Enquiry form',

@@ -10,14 +10,14 @@ import {
 import { useIntl, FormattedMessage } from 'react-intl'
 import { Form, Input, message, TreeSelect, Upload, UploadProps } from 'antd'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { IArticle, IFile, IRes, OPER } from '@cms/server/src/interface'
+import { IArticle, IFile, IRes, OPER } from 'src/interface'
 // import { editorList } from '@/components/Editor'
 import { DeleteOutlined, InboxOutlined } from '@ant-design/icons'
 import { postPictures } from '@/http/restful'
 import { useSearch } from '@/hooks'
 import dynamic from 'next/dynamic'
-import { useCateStore } from '@/pages/cate/cateStore'
-import { useArticleStore } from '../articleStore'
+import { useCateStore } from '@/store/cateStore'
+import { useArticleStore } from '../../../store/articleStore'
 import Image from 'next/image'
 
 export type UpdateFormProps = {
@@ -63,7 +63,7 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
   useEffect(() => {
     if (article) {
       formRef.current?.setFieldsValue(article)
-      setContent(article.content)
+      setContent(article.content as string)
     } else {
       formRef.current?.resetFields()
       setContent('')
@@ -92,7 +92,7 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
   const uploadFiles = async (files: FileList) => {
     const results = (await postPictures(
       Array.from(files),
-    )) as PromiseSettledResult<IRes<IFile[]>>[]
+    )) as PromiseSettledResult<IRes<{data:IFile[]}>>[]
     console.log('results', results)
     if (results[0].status === 'rejected') {
       message.error(intl.formatMessage({ id: 'pages.article.uploadPicFail' }))
@@ -100,7 +100,7 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
     }
     formRef.current?.setFieldValue(
       'picture',
-      results[0].value.data.data[0]?.url,
+      (results[0].value.payload?.data as any)[0]?.url,
     )
   }
   const uploadProps: UploadProps = {

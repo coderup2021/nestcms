@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { IUser, IUserList, QueryOption, IRes } from '@cms/server/src/interface'
+import { IUser, IUserList, QueryOption, IRes } from 'src/interface'
 import { get, post, del, put } from 'src/http/restful'
 
 /** 获取角色详情 GET /api/admin/:id */
