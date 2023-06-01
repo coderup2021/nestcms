@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:server": "pnpm --filter @cms/server start:dev",
-    "dev:web": "pnpm --filter @cms/web dev",
+    "server:dev": "pnpm --filter @cms/server start:dev",
+    "server:start": "pnpm --filter @cms/server start",
+    "server:prod": "pnpm --filter @cms/server start:prod",
+    "server:build": "pnpm --filter @cms/server build",
+    "web:dev": "pnpm --filter @cms/web dev",
+    "web:build": "pnpm --filter @cms/web build",
+    "web:export": "pnpm --filter @cms/web export",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
