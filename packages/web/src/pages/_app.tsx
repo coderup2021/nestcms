@@ -1,5 +1,4 @@
 import '@/styles/globals.scss'
-import 'src/pages/article/components/ArticleForm.scss'
 import type { AppProps } from 'next/app'
 import { IntlProvider } from 'react-intl'
 import cn from 'src/locales/zh-CN'

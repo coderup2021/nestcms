@@ -5,18 +5,21 @@ const removeImports = require('next-remove-imports')()
 
 const nextConfig = removeImports({
   reactStrictMode: true,
+  images: {
+    unoptimized: true,
+  },
   experimental: {
     externalDir: true,
   },
-  rewrites : () => {
+  basePath: '/admin',
+  rewrites: () => {
     return [
       {
-        source: "/:api*",
-        destination: "http://127.0.0.1:8001/:api*",
+        source: '/:api*',
+        destination: 'http://127.0.0.1:8001/:api*',
       },
-    ];
-  }
-
+    ]
+  },
 })
 
 module.exports = nextConfig
