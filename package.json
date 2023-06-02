@@ -10,13 +10,14 @@
     "server:build": "pnpm --filter @cms/server build",
     "web:dev": "pnpm --filter @cms/web dev",
     "web:build": "pnpm --filter @cms/web build",
-    "web:export": "pnpm --filter @cms/web export",
+    "web:export": "env-cmd node ./exportAdmin.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0"
   }
 }
