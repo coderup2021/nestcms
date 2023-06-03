@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CoderUp's Blog</title>
+    <link rel="stylesheet" href="/assets/styles/reset.css" />
+    <link rel="stylesheet" href="/assets/styles/media.css" />
+    <link rel="stylesheet" href="/assets/styles/style.css" />
+    <link rel="stylesheet" href="/assets/styles/github.css" />
+    <link
+      rel="stylesheet"
+      href="http://at.alicdn.com/t/c/font_3950161_gpyybvakda4.css"
+    />
+  </head>
+  <body style="display: none">
+    <script>
+      var theme = localStorage.getItem('theme')
+      if (theme) {
+        document.body.classList.add(theme)
+        document.body.style.display = ''
+      }
+    </script>
+    <header class="top-bar">
+      <div class="container">
+        <div class="left">
+          <a href="/" class="logo">
+            <img src="/assets/styles/logo/logo-coderup.png" alt="coderup" />
+          </a>
+        </div>
+        <div class="right">
+          <span id="theme-btn" class="iconfont icon-sun header-icon"></span>
+          <span class="iconfont icon-search header-icon"></span>
+        </div>
+      </div>
+    </header>
+    <main class="main-list">
+      <section class="title-line">
+        <h1>我的文章</h1>
+      </section>
+      <ul class="article-list">
+        <% articleList.forEach(function(article){ %>
+        <li>
+          <a href="/article/<%= article.id %>" class="item">
+            <div class="up">
+              <img src="/static/20230314/image@20230314225353_221065.png" />
+            </div>
+            <div class="down">
+              <h2 class="title"><%= article.title %></h2>
+              <p class="desc"><%= article.description %></p>
+              <p class="time">@<%= article.updatedAt %></p>
+              <p class="tags"></p>
+            </div>
+          </a>
+        </li>
+        <% }) %>
+      </ul>
+    </main>
+  </body>
+  <script src="/assets/js/theme.js"></script>
+</html>

@@ -18,19 +18,7 @@ export default () => {
       base64: false,
       storage: {
         self: {
-          path: `/uploads`,
-        },
-      },
-    },
-    staticFile: {
-      dirs: {
-        default: {
-          prefix: '/assets',
-          dir: path.join(__dirname, './view/assets'),
-        },
-        uploads: {
-          prefix: '/static',
-          dir: path.join(__dirname, './uploads'),
+          path: path.join(__dirname, `../uploads`),
         },
       },
     },

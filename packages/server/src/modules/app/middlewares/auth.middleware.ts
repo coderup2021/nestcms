@@ -8,6 +8,7 @@ export class AuthMiddleware implements NestMiddleware {
 
   }
   use(req: Request, res: Response, next: NextFunction) {
+    console.log('req.path', req.path);
     if (req.path.endsWith('/admin/login') || !req.path.startsWith('/api/')) {
       next()
     } else {

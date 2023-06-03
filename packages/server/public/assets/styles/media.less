@@ -1,0 +1,78 @@
+// out: true
+
+@media (max-width: 639px) {
+  .top-bar .container {
+    max-width: 100vw;
+    width: 100vw;
+  }
+  ul.article-list {
+    max-width: 100%;
+  }
+}
+@media (min-width: 640px) {
+  .top-bar .container {
+    max-width: 640px;
+  }
+  ul.article-list {
+    max-width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .top-bar .container {
+    padding: 1rem 0.25rem;
+    max-width: 100%;
+  }
+  .main-list {
+    padding: 20px;
+
+    ul.article-list {
+      max-width: 100%;
+      justify-content: space-around !important;
+
+      li {
+        width: 284px;
+      }
+    }
+  }
+}
+
+// 3列
+@media (min-width: 1024px) {
+  .top-bar .container {
+    max-width: 1024px;
+  }
+  ul.article-list {
+    max-width: 100%;
+    justify-content: space-around !important;
+
+    li {
+      min-width: 284px;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .top-bar .container {
+    max-width: 1280px;
+  }
+  ul.article-list {
+    max-width: 100%;
+    li {
+      min-width: 310px;
+    }
+  }
+}
+
+@media (min-width: 1536px) {
+  .top-bar .container {
+    max-width: 1536px;
+  }
+  ul.article-list {
+    max-width: 100%;
+    li {
+      min-width: 420px;
+    }
+  }
+}

@@ -13,7 +13,7 @@ import { ResourceModule } from 'src/modules/resource/resource.module';
 import { UserModule } from 'src/modules/user/user.module';
 import configuration from 'src/configuration';
 import { AuthMiddleware } from './middlewares/auth.middleware';
-import { HomeModule } from 'src/modules/front/home/home.module';
+import { HomeModule } from 'src/modules/render/home/home.module';
 
 @Module({
   imports: [
