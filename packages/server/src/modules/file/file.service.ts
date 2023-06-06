@@ -96,11 +96,10 @@ export class FileService {
   _getDistFilenameObj(files: FileObj[]): IStoragePath[] {
     const arr: IStoragePath[] = [];
     const storagePath = this.configService.get('upload.storage.self.path');
-    const dateDir = dayjs().format('YYYYMMDD');
     files.forEach((file) => {
       console.log('file', file);
       const filename = `${this._addRandomToFilename(file.file.originalname)}`;
-      const relativePath = `${dateDir}/${filename}`;
+      const relativePath = `${filename}`;
       const obj: IStoragePath = {
         filename,
         relativePath,
@@ -121,19 +120,19 @@ export class FileService {
     const dateDir = dayjs().format('YYYYMMDD');
     const appDir = path.resolve(__dirname, '../../');
     console.log('appDir', appDir);
-    // const targetDir = `${storagePath}/${dateDir}`;
-    fse.ensureDirSync(storagePath);
+    const targetDir = `${storagePath}/${dateDir}`;
+    fse.ensureDirSync(targetDir);
     const distFileArr = this._getDistFilenameObj(files);
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       fse.writeFileSync(
-        `${storagePath}/${distFileArr[i].relativePath}`,
+        `${targetDir}/${distFileArr[i].relativePath}`,
         file.file.buffer,
         {},
       );
       const fileObj: IFile = {
         name: file.fieldname,
-        url: distFileArr[i].relativePath,
+        url: `${dateDir}/${distFileArr[i].relativePath}`,
         storage: file.storage,
       };
       const { id, url, alt, storage, name } = await this.create(fileObj);

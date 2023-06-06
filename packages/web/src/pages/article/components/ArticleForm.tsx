@@ -100,7 +100,7 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
     }
     formRef.current?.setFieldValue(
       'picture',
-      (results[0].value?.data as any).payload[0]?.url,
+      '/' + (results[0].value?.data as any).payload[0]?.url,
     )
   }
   const uploadProps: UploadProps = {
