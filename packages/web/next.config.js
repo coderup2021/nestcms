@@ -12,6 +12,7 @@ const nextConfig = removeImports({
     externalDir: true,
   },
   basePath: '/admin',
+  outDir: process.env.EXPORT_PATH || 'out',
   rewrites: () => {
     return [
       {
