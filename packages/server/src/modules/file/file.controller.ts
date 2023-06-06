@@ -25,6 +25,6 @@ export class FileController {
     const res = await this.fileService.storage([
       { storage: body.storage, fieldname: body.name, file },
     ]);
-    return { status: 0, data: res };
+    return { status: 0, payload: res };
   }
 }

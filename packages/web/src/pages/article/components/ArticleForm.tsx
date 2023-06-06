@@ -92,7 +92,7 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
   const uploadFiles = async (files: FileList) => {
     const results = (await postPictures(
       Array.from(files),
-    )) as PromiseSettledResult<IRes<{data:IFile[]}>>[]
+    )) as PromiseSettledResult<any>[]
     console.log('results', results)
     if (results[0].status === 'rejected') {
       message.error(intl.formatMessage({ id: 'pages.article.uploadPicFail' }))
@@ -100,7 +100,7 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
     }
     formRef.current?.setFieldValue(
       'picture',
-      (results[0].value.payload?.data as any)[0]?.url,
+      (results[0].value?.data as any).payload[0]?.url,
     )
   }
   const uploadProps: UploadProps = {

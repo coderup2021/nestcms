@@ -121,13 +121,13 @@ export class FileService {
     const dateDir = dayjs().format('YYYYMMDD');
     const appDir = path.resolve(__dirname, '../../');
     console.log('appDir', appDir);
-    const targetDir = `${appDir}/${storagePath}/${dateDir}`;
-    fse.ensureDirSync(targetDir);
+    // const targetDir = `${storagePath}/${dateDir}`;
+    fse.ensureDirSync(storagePath);
     const distFileArr = this._getDistFilenameObj(files);
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       fse.writeFileSync(
-        `${appDir}/${distFileArr[i].absolutePath}`,
+        `${storagePath}/${distFileArr[i].relativePath}`,
         file.file.buffer,
         {},
       );
@@ -137,9 +137,9 @@ export class FileService {
         storage: file.storage,
       };
       const { id, url, alt, storage, name } = await this.create(fileObj);
-      const prefix = this.configService.get('staticFile.dirs.uploads.prefix');
-      console.log('prefix', prefix);
-      const targetUrl = `${prefix}/${url}`;
+      //   const prefix = this.configService.get('staticFile.dirs.uploads.prefix');
+      //   console.log('prefix', prefix);
+      const targetUrl = `static/${url}`;
       console.log('targetUrl', targetUrl);
 
       ret.push({ id, url: targetUrl, alt, storage, name });
