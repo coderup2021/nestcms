@@ -199,14 +199,15 @@ const ArticleForm: React.FC<UpdateFormProps> = (props) => {
       <ProFormDependency name={['_', ['picture']]}>
         {({ picture }) => {
           return picture ? (
-            <div className={'upload-preview-box'}>
+            <div className={'upload-preview-box'} style={{marginBottom:20, display:'flex',justifyContent:'space-between'}}>
+              <Image src={picture} alt={'thumb'} width={480} height={320}/>
               <DeleteOutlined
                 className={'del-icon'}
                 onClick={() => {
                   formRef.current?.setFieldValue('picture', void 0)
                 }}
+		style={{fontSize:48}}
               />
-              <Image src={picture} alt={'thumb'} width={200} />
             </div>
           ) : (
             <Dragger

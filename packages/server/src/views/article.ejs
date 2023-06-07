@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= article.title %>-CoderUp's Blog</title>
+    <link rel="stylesheet" href="/assets/styles/reset.css" />
+    <link rel="stylesheet" href="/assets/styles/media.css" />
+    <link rel="stylesheet" href="/assets/styles/style.css" />
+    <link rel="stylesheet" href="/assets/styles/github.css" />
+    <link
+      rel="stylesheet"
+      href="http://at.alicdn.com/t/c/font_3950161_gpyybvakda4.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  </head>
+  <body style="display: none">
+    <script>
+      var theme = localStorage.getItem('theme')
+      if (theme) {
+        document.body.classList.add(theme)
+        document.body.style.display = ''
+      }
+    </script>
+    <header class="top-bar">
+      <div class="container">
+        <div class="left">
+          <span
+            class="iconfont icon-left header-icon"
+            onclick="history.back()"
+          ></span>
+          <a href="/" class="logo">
+            <img src="/assets/styles/logo/logo-coderup.png" alt="coderup" />
+          </a>
+        </div>
+        <div class="right">
+          <span id="theme-btn" class="iconfont icon-sun header-icon"></span>
+          <span class="iconfont icon-search header-icon"></span>
+        </div>
+      </div>
+    </header>
+    <main class="main-article">
+      <article class="markdown-body">
+        <div class="big-img">
+          <img src="<%= article.picture %>" />
+        </div>
+        <h1 class="title"><%= article.title %></h1>
+        <p class="desc">
+          <span class="datetime"><%= article.updatedAt %></span>
+          <span class="word-count">字数 <%= article.wordCount || 0 %></span>
+          <span class="click-count"
+            >阅读次数 <%= article.clickCount || 0 %></span
+          >
+        </p>
+        <section class="content"><%- article.content %></section>
+      </article>
+    </main>
+  </body>
+  <script>
+    document.body.onload = function () {
+      document.querySelectorAll('pre code').forEach((el) => {
+        hljs.highlightElement(el)
+      })
+
+      Array.from(document.getElementsByTagName('pre')).forEach((item) => {
+        item.style.position = 'relative'
+        let copyButton = document.createElement('button')
+        copyButton.style.cssText =
+          'border-radius:4px; position:absolute; right:10px; top:10px; cursor:pointer; border:none'
+        copyButton.innerHTML = 'COPY'
+        copyButton.onclick = function () {
+          let copyData = item.firstChild.innerText
+          copyToClipboard(copyData)
+          copyButton.innerHTML = 'COPIED'
+          setTimeout(function () {
+            copyButton.innerHTML = 'COPY'
+          }, 1000)
+        }
+        item.appendChild(copyButton)
+      })
+
+      function copyToClipboard(content) {
+        if (window.clipboardData) {
+          window.clipboardData.setData('text', content)
+        } else {
+          ;(function (content) {
+            document.oncopy = function (e) {
+              e.clipboardData.setData('text', content)
+              e.preventDefault()
+              document.oncopy = null
+            }
+          })(content)
+          document.execCommand('Copy')
+        }
+      }
+    }
+  </script>
+  <script src="/assets/js/theme.js"></script>
+</html>
+

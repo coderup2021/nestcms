@@ -149,9 +149,11 @@ const TableList: React.FC = () => {
       render: (dom, entity) => {
         return (
           <a
-            onClick={() => {
-              setCurrentRow(entity)
-            }}
+            // onClick={() => {
+            //   setCurrentRow(entity)
+            // }}
+            href={`/article/${entity.id}`}
+            target='_blank'
           >
             {dom}
           </a>
@@ -307,10 +309,12 @@ const TableList: React.FC = () => {
               } else {
                 await handleAdd(value)
               }
-              setCurrentRow(undefined)
+              setCurrentRow({})
+	setTimeout(()=>{
               if (actionRef.current) {
                 actionRef.current.reload()
               }
+	} ,1000)
             }}
             onCancel={() => {
               push(OPER.NONE)

@@ -5,14 +5,11 @@ const removeImports = require('next-remove-imports')()
 
 const nextConfig = removeImports({
   reactStrictMode: true,
+  outDir: process.env.EXPORT_PATH || 'out',
   images: {
     unoptimized: true,
   },
-  experimental: {
-    externalDir: true,
-  },
   basePath: '/admin',
-  outDir: process.env.EXPORT_PATH || 'out',
   rewrites: () => {
     return [
       {
